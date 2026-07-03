@@ -1,0 +1,55 @@
+# 1. Inicializar repositorio local
+
+git init
+git branch -M master
+git add README.md .gitignore pom.xml src docs
+git commit -m "chore: create initial Maven web project"
+
+# 2. Crear branch develop
+
+git checkout -b develop
+git add .
+git commit -m "docs: add project documentation"
+
+# 3. Crear branches por funcionalidad o recurso
+
+git checkout -b feature/user
+git add .
+git commit -m "feat: add user registration and login"
+git checkout develop
+git merge feature/user --no-ff
+
+
+git checkout -b feature/imc
+git add .
+git commit -m "feat: add BMI calculation"
+git checkout develop
+git merge feature/imc --no-ff
+
+
+git checkout -b feature/historial-rest
+git add .
+git commit -m "feat: add REST history resource"
+git checkout develop
+git merge feature/historial-rest --no-ff
+
+
+git checkout -b feature/documentacion
+git add .
+git commit -m "docs: add wiki and delivery documentation"
+git checkout develop
+git merge feature/documentacion --no-ff
+
+# 4. Mandar develop a master y crear tag estable
+
+git checkout master
+git merge develop --no-ff
+git tag -a v1.0.0 -m "Version estable final"
+
+# 5. Conectar con GitHub. Cambia TU_USUARIO por tu usuario real.
+
+git remote add origin https://github.com/TU_USUARIO/IMCJavaMVCREST.git
+git push -u origin master
+git push -u origin develop
+git push origin feature/user feature/imc feature/historial-rest feature/documentacion
+git push origin --tags

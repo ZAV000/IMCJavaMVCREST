@@ -1,0 +1,8 @@
+target/
+*.class
+*.log
+.nb-gradle/
+nbproject/private/
+.idea/
+.vscode/
+.DS_Store

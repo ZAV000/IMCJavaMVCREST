@@ -1,0 +1,28 @@
+digraph G {
+    graph [rankdir=LR, bgcolor="white", pad="0.2", nodesep="0.7", ranksep="0.8"];
+    node [shape=box, fontname="Arial", fontsize=10, style="rounded,filled", fillcolor="#eef7ff", color="#3b82f6"];
+    edge [fontname="Arial", fontsize=9, color="#374151"];
+
+    Usuario [label="Usuario\n- id:int\n- nombreCompleto:String\n- username:String\n- passwordHash:String\n- edad:int\n- sexo:String\n- estatura:double"];
+    CalculoIMC [label="CalculoIMC\n- id:int\n- usuarioId:int\n- peso:double\n- imc:double\n- categoria:String\n- fecha:String"];
+    IMCService [label="IMCService\n+ calcular(peso, estatura):double\n+ clasificar(imc):String"];
+    UsuarioDAO [label="UsuarioDAO\n+ registrar(usuario)\n+ login(username,passwordHash)\n+ buscarPorId(id)"];
+    CalculoIMCDAO [label="CalculoIMCDAO\n+ guardar(calculo)\n+ listarPorUsuario(usuarioId)"];
+    RegistroServlet [label="RegistroServlet\n+ doPost(request,response)"];
+    LoginServlet [label="LoginServlet\n+ doPost(request,response)"];
+    CalculadoraServlet [label="CalculadoraServlet\n+ doPost(request,response)"];
+    HistorialResource [label="HistorialResource\nGET /api/historial/{usuarioId}"];
+    DBConnection [label="DBConnection\n+ getConnection():Connection"];
+
+    RegistroServlet -> UsuarioDAO;
+    LoginServlet -> UsuarioDAO;
+    CalculadoraServlet -> IMCService;
+    CalculadoraServlet -> CalculoIMCDAO;
+    HistorialResource -> CalculoIMCDAO;
+    HistorialResource -> UsuarioDAO;
+    UsuarioDAO -> DBConnection;
+    CalculoIMCDAO -> DBConnection;
+    UsuarioDAO -> Usuario;
+    CalculoIMCDAO -> CalculoIMC;
+    Usuario -> CalculoIMC [label="1 a muchos"];
+}

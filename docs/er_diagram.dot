@@ -1,0 +1,10 @@
+digraph ER {
+    graph [rankdir=LR, bgcolor="white"];
+    node [shape=box, fontname="Arial", fontsize=10, style="rounded,filled", fillcolor="#f0fdf4", color="#16a34a"];
+    edge [fontname="Arial", fontsize=9, color="#374151"];
+
+    usuarios [label="usuarios\nPK id INT\nnombre_completo VARCHAR(120)\nusername VARCHAR(50) UNIQUE\npassword_hash VARCHAR(64)\nedad INT\nsexo VARCHAR(15)\nestatura DECIMAL(3,2)"];
+    calculos [label="calculos_imc\nPK id INT\nFK usuario_id INT\npeso DECIMAL(5,2)\nimc DECIMAL(5,2)\ncategoria VARCHAR(40)\nfecha DATETIME"];
+
+    usuarios -> calculos [label="1:N"];
+}
